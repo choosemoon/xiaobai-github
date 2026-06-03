@@ -71,8 +71,11 @@ body {
 .pain-section h2 { text-align: center; font-size: 32px; margin-bottom: 12px; }
 .pain-section .subtitle { text-align: center; color: #656d76; margin-bottom: 48px; }
 .pain-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px; max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 24px; max-width: 800px; margin: 0 auto;
+}
+@media (max-width: 640px) {
+  .pain-grid { grid-template-columns: 1fr; }
 }
 .pain-card {
   background: #f6f8fa; border-radius: 16px; padding: 32px;
