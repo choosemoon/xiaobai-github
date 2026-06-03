@@ -3,1985 +3,365 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>小白GitHub - 一键部署开源项目，无需任何技术基础</title>
-<meta name="description" content="给个GitHub链接，AI自动生成一键部署手册。不懂代码？看不懂英文？网络不稳定？完全没关系。">
-<meta property="og:title" content="小白GitHub - 一键部署开源项目，无需任何技术基础">
-<meta property="og:description" content="给个GitHub链接，AI自动生成一键部署手册。专为小白设计，无需任何技术基础。">
-<meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'%3E%3Crect width='1200' height='630' fill='%230d1117'/%3E%3Ctext x='600' y='280' text-anchor='middle' font-size='72' font-weight='bold' fill='white' font-family='sans-serif'%3E小白GitHub%3C/text%3E%3Ctext x='600' y='380' text-anchor='middle' font-size='32' fill='%238b949e' font-family='sans-serif'%3E给个GitHub链接，AI自动生成一键部署手册%3C/text%3E%3C/svg%3E">
-<meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 98 96'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z' fill='white'/%3E%3C/svg%3E">
+<title>小白GitHub - 一键部署开源项目</title>
 <style>
-/* =============================================
-   CSS VARIABLES
-   ============================================= */
-:root {
-  --white: #ffffff;
-  --bg-primary: #ffffff;
-  --bg-secondary: #f6f8fa;
-  --bg-tertiary: #f0f2f5;
-  --bg-dark: #0d1117;
-  --gh-black: #1f2328;
-  --gh-gray: #656d76;
-  --gh-light-gray: #8c959f;
-  --gh-border: #d0d7de;
-  --gh-border-muted: #eaecef;
-  --gh-blue: #0969da;
-  --gh-blue-hover: #0550ae;
-  --gh-blue-bg: #ddf4ff;
-  --gh-green: #1a7f37;
-  --gh-green-bg: #dafbe1;
-  --gh-red: #cf222e;
-  --gh-red-bg: #ffebe9;
-  --gh-orange: #bc4c00;
-  --gh-purple: #8250df;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06);
-  --shadow-xl: 0 24px 64px rgba(0,0,0,0.15), 0 8px 24px rgba(0,0,0,0.08);
-  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
-  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', 'Liberation Mono', Menlo, monospace;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-full: 9999px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* =============================================
-   RESET & BASE
-   ============================================= */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-  font-family: var(--font-sans);
-  color: var(--gh-black);
-  background: var(--white);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   line-height: 1.6;
-  max-width: 100vw;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: #1f2328;
+  background: #ffffff;
 }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-a {
-  color: var(--gh-blue);
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-a:hover {
-  color: var(--gh-blue-hover);
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* =============================================
-   UTILITY
-   ============================================= */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.section {
-  padding: 80px 0;
-}
-
-.section-title {
-  font-size: 32px;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 16px;
-  color: var(--gh-black);
-}
-
-.section-subtitle {
-  font-size: 18px;
-  text-align: center;
-  color: var(--gh-gray);
-  margin-bottom: 48px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Fade-in animation */
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* =============================================
-   1. WECHAT TIP
-   ============================================= */
-#wechat-tip {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10000;
-  background: linear-gradient(135deg, #bc4c00, #e16f24);
-  color: white;
-  text-align: center;
-  padding: 14px 24px;
-  font-size: 15px;
-  font-weight: 500;
-  box-shadow: var(--shadow-md);
-}
-
-#wechat-tip .wechat-tip-close {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  opacity: 0.8;
-  line-height: 1;
-}
-
-#wechat-tip .wechat-tip-close:hover {
-  opacity: 1;
-}
-
-/* =============================================
-   3. FLOAT POPUP
-   ============================================= */
-#float-popup {
-  position: fixed;
-  bottom: -120px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 8999;
-  background: linear-gradient(135deg, #e16f24, #bc4c00);
-  color: white;
-  padding: 16px 28px;
-  border-radius: var(--radius-full);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 8px 32px rgba(188, 76, 0, 0.35);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: bottom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  white-space: nowrap;
-  max-width: 90vw;
-}
-
-#float-popup.show {
-  bottom: 32px;
-}
-
-#float-popup:hover {
-  box-shadow: 0 8px 40px rgba(188, 76, 0, 0.5);
-}
-
-#float-popup .popup-close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  border: none;
-  color: white;
-  font-size: 14px;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
-#float-popup .popup-close:hover {
-  background: rgba(255,255,255,0.3);
-}
-
-/* =============================================
-   4. NAVIGATION
-   ============================================= */
+/* ===== NAV ===== */
 .nav {
-  position: sticky;
-  top: 0;
-  z-index: 8000;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid var(--gh-border-muted);
-  padding: 0 24px;
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid #eaecef; z-index: 1000;
 }
-
 .nav-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; max-width: 1100px; margin: 0 auto; padding: 0 24px;
 }
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--gh-black);
-  text-decoration: none;
-}
-
-.nav-brand:hover {
-  color: var(--gh-black);
-}
-
-.nav-brand svg {
-  width: 32px;
-  height: 32px;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  list-style: none;
-}
-
-.nav-links a {
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--gh-gray);
-  border-radius: var(--radius-sm);
-  transition: var(--transition);
-}
-
-.nav-links a:hover {
-  color: var(--gh-black);
-  background: var(--bg-secondary);
-}
-
+.nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
+.nav-logo svg { width: 28px; height: 28px; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a { color: #656d76; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+.nav-links a:hover { color: #1f2328; }
 .nav-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 20px;
-  background: linear-gradient(135deg, #8250df, #6e40c9);
-  color: white !important;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: var(--radius-full);
-  transition: var(--transition);
+  background: #1f2328; color: white !important; padding: 8px 16px;
+  border-radius: 20px; font-weight: 600; font-size: 14px;
 }
 
-.nav-cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(130, 80, 223, 0.4);
-  background: linear-gradient(135deg, #8250df, #6e40c9);
-}
-
-/* Mobile menu */
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: var(--gh-black);
-  cursor: pointer;
-  padding: 4px;
-}
-
-/* =============================================
-   5. HERO
-   ============================================= */
+/* ===== HERO ===== */
 .hero {
-  padding: 100px 0 80px;
-  background: linear-gradient(180deg, var(--white) 0%, var(--bg-secondary) 100%);
-  text-align: center;
-  overflow: hidden;
+  padding: 140px 24px 80px; text-align: center;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f8fa 100%);
 }
-
 .hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  background: var(--gh-blue-bg);
-  color: var(--gh-blue);
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: var(--radius-full);
-  margin-bottom: 32px;
-  border: 1px solid rgba(9, 105, 218, 0.15);
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; background: #ddf4ff; color: #0969da;
+  border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 24px;
 }
-
-.hero-logo {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 32px;
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.15));
+.hero-logo { width: 80px; height: 80px; margin: 0 auto 24px; }
+.hero h1 {
+  font-size: clamp(32px, 5vw, 52px); font-weight: 800;
+  line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em;
 }
-
-.hero-logo svg {
-  width: 100%;
-  height: 100%;
-}
-
-.hero-title {
-  font-size: 48px;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 16px;
-  color: var(--gh-black);
-  letter-spacing: -0.02em;
-}
-
-.hero-title .highlight {
-  background: linear-gradient(135deg, var(--gh-blue), var(--gh-purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
+.hero h1 .highlight { color: #0969da; }
 .hero-subtitle {
-  font-size: 22px;
-  color: var(--gh-gray);
-  margin-bottom: 48px;
-  max-width: 560px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.5;
+  font-size: clamp(16px, 2.5vw, 20px); color: #656d76;
+  max-width: 560px; margin: 0 auto 32px; line-height: 1.7;
 }
+.hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: 28px; font-size: 16px;
+  font-weight: 600; text-decoration: none; transition: all 0.2s;
+  cursor: pointer; border: none;
+}
+.btn-primary { background: #1f2328; color: white; }
+.btn-primary:hover { background: #2d333b; transform: translateY(-2px); }
+.btn-secondary { background: white; color: #1f2328; border: 1px solid #d0d7de; }
+.btn-secondary:hover { background: #f6f8fa; }
 
-/* Pain Point Grid */
+/* ===== PAIN POINTS ===== */
+.pain-section { padding: 80px 24px; }
+.pain-section h2 { text-align: center; font-size: 32px; margin-bottom: 12px; }
+.pain-section .subtitle { text-align: center; color: #656d76; margin-bottom: 48px; }
 .pain-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  max-width: 800px;
-  margin: 0 auto 48px;
-  text-align: left;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px; max-width: 900px; margin: 0 auto;
 }
-
-.pain-col {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.pain-col-header {
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 8px 16px;
-  border-radius: var(--radius-sm);
-  text-align: center;
-}
-
-.pain-col-header.pain {
-  background: var(--gh-red-bg);
-  color: var(--gh-red);
-}
-
-.pain-col-header.solution {
-  background: var(--gh-green-bg);
-  color: var(--gh-green);
-}
-
-.pain-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px;
-  border-radius: var(--radius-md);
-  transition: var(--transition);
-}
-
-.pain-item.pain-item-card {
-  background: var(--white);
-  border: 1px solid var(--gh-border);
-}
-
-.pain-item.solution-item-card {
-  background: var(--white);
-  border: 1px solid rgba(26, 127, 55, 0.2);
-}
-
-.pain-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.pain-item .icon {
-  font-size: 24px;
-  flex-shrink: 0;
-  width: 40px;
-  text-align: center;
-}
-
-.pain-item .text {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--gh-black);
-}
-
-/* Hero CTA */
-.hero-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 48px;
-  flex-wrap: wrap;
-}
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 32px;
-  background: var(--gh-blue);
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: var(--radius-full);
-  border: none;
-  cursor: pointer;
-  transition: var(--transition);
-  text-decoration: none;
-  box-shadow: 0 4px 16px rgba(9, 105, 218, 0.3);
-}
-
-.btn-primary:hover {
-  background: var(--gh-blue-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(9, 105, 218, 0.4);
-  color: white;
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 32px;
-  background: var(--white);
-  color: var(--gh-black);
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--gh-border);
-  cursor: pointer;
-  transition: var(--transition);
-  text-decoration: none;
-}
-
-.btn-secondary:hover {
-  border-color: var(--gh-blue);
-  color: var(--gh-blue);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-/* Stats */
-.hero-stats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 48px;
-  flex-wrap: wrap;
-}
-
-.stat-item {
-  text-align: center;
-}
-
-.stat-number {
-  font-size: 36px;
-  font-weight: 800;
-  color: var(--gh-blue);
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: 14px;
-  color: var(--gh-gray);
-  margin-top: 4px;
-}
-
-/* =============================================
-   6. PAIN POINT EMPATHY
-   ============================================= */
-.pain-section {
-  background: var(--bg-secondary);
-}
-
-.pain-cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
 .pain-card {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 32px 24px;
-  text-align: center;
-  border: 1px solid var(--gh-border-muted);
-  transition: var(--transition);
+  background: #f6f8fa; border-radius: 16px; padding: 32px;
+  border: 1px solid #eaecef; transition: all 0.3s;
 }
+.pain-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.pain-icon { font-size: 40px; margin-bottom: 16px; }
+.pain-card h3 { font-size: 18px; margin-bottom: 8px; }
+.pain-card p { color: #656d76; font-size: 14px; }
 
-.pain-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-}
-
-.pain-card-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
-}
-
-.pain-card-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--gh-black);
-}
-
-.pain-card-desc {
-  font-size: 14px;
-  color: var(--gh-gray);
-  line-height: 1.6;
-}
-
-/* =============================================
-   7. STEPS
-   ============================================= */
-.steps-section {
-  background: var(--white);
-}
-
-.steps-list {
-  max-width: 700px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
+/* ===== STEPS ===== */
+.steps-section { padding: 80px 24px; background: #f6f8fa; }
+.steps-section h2 { text-align: center; font-size: 32px; margin-bottom: 12px; }
+.steps-section .subtitle { text-align: center; color: #656d76; margin-bottom: 48px; }
+.steps-list { max-width: 800px; margin: 0 auto; }
 .step-item {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  padding: 28px;
-  background: var(--bg-secondary);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--gh-border-muted);
-  transition: var(--transition);
+  display: flex; gap: 24px; background: white; border-radius: 16px;
+  padding: 28px; margin-bottom: 16px; border: 1px solid #eaecef;
+  transition: all 0.3s;
 }
-
-.step-item:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--gh-border);
-}
-
+.step-item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
 .step-badge {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--gh-blue), var(--gh-purple));
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 800;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #0969da, #8250df);
+  color: white; display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 800; flex-shrink: 0;
 }
-
-.step-badge.bonus {
-  background: linear-gradient(135deg, var(--gh-orange), #d29922);
-  font-size: 24px;
-}
-
-.step-bonus {
-  background: linear-gradient(135deg, rgba(188, 76, 0, 0.08), rgba(210, 153, 34, 0.08));
-  border: 2px solid rgba(188, 76, 0, 0.2);
-  margin-bottom: 24px;
-}
-
-.step-bonus .step-title {
-  color: var(--gh-orange);
-}
-
-.step-links {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.step-link-copy {
-  background: transparent;
-  border: 1px solid var(--gh-border);
-  color: var(--gh-gray);
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 14px;
-}
-
-.step-content {
-  flex: 1;
-}
-
-.step-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--gh-black);
-}
-
-.step-desc {
-  font-size: 14px;
-  color: var(--gh-gray);
-  line-height: 1.6;
-  margin-bottom: 12px;
-}
-
+.step-badge.bonus { background: linear-gradient(135deg, #bc4c00, #d29922); font-size: 24px; }
+.step-content h3 { font-size: 18px; margin-bottom: 6px; }
+.step-content p { color: #656d76; font-size: 14px; margin-bottom: 12px; }
 .step-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--gh-blue);
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; background: #ddf4ff; color: #0969da;
+  border-radius: 8px; font-size: 14px; font-weight: 500;
+  text-decoration: none; transition: all 0.2s; border: none; cursor: pointer;
 }
+.step-link:hover { background: #0969da; color: white; }
 
-.step-link:hover {
-  gap: 10px;
-}
-
-/* =============================================
-   8. VIDEO
-   ============================================= */
-.video-section {
-  background: linear-gradient(180deg, var(--bg-dark) 0%, #161b22 100%);
-  color: white;
-}
-
-.video-section .section-title {
-  color: white;
-}
-
-.video-section .section-subtitle {
-  color: var(--gh-light-gray);
-}
-
+/* ===== VIDEO ===== */
+.video-section { padding: 80px 24px; }
+.video-section h2 { text-align: center; font-size: 32px; margin-bottom: 12px; }
+.video-section .subtitle { text-align: center; color: #656d76; margin-bottom: 48px; }
 .video-wrapper {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  background: #21262d;
-  aspect-ratio: 16 / 9;
-  box-shadow: var(--shadow-xl);
+  max-width: 900px; margin: 0 auto; border-radius: 16px;
+  overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.15);
+  background: #0d1117;
 }
+.video-wrapper video { width: 100%; display: block; }
 
-.video-wrapper video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.video-placeholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  background: linear-gradient(135deg, #21262d, #30363d);
-  cursor: pointer;
-}
-
-.video-placeholder .play-icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(10px);
-  transition: var(--transition);
-}
-
-.video-placeholder:hover .play-icon {
-  background: rgba(255,255,255,0.25);
-  transform: scale(1.1);
-}
-
-.video-placeholder .play-icon svg {
-  width: 32px;
-  height: 32px;
-  fill: white;
-  margin-left: 4px;
-}
-
-.video-placeholder .play-text {
-  font-size: 16px;
-  color: var(--gh-light-gray);
-}
-
-.video-upload-hint {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 13px;
-  color: var(--gh-light-gray);
-  opacity: 0.7;
-}
-
-/* =============================================
-   9. PROMPT
-   ============================================= */
-.prompt-section {
-  background: var(--bg-secondary);
-}
-
-.prompt-window {
-  max-width: 800px;
-  margin: 0 auto;
-  background: var(--white);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
-  overflow: hidden;
-  border: 1px solid var(--gh-border);
-}
-
-.prompt-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 20px;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--gh-border);
-}
-
-.prompt-dots {
-  display: flex;
-  gap: 8px;
-}
-
-.prompt-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
-.prompt-dot.red { background: #ff5f57; }
-.prompt-dot.yellow { background: #febc2e; }
-.prompt-dot.green { background: #28c840; }
-
-.prompt-toolbar-title {
-  font-size: 13px;
-  color: var(--gh-gray);
-  font-weight: 500;
-}
-
-.prompt-copy-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 16px;
-  background: var(--gh-blue);
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
-  border: none;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: var(--transition);
-  font-family: var(--font-sans);
-}
-
-.prompt-copy-btn:hover {
-  background: var(--gh-blue-hover);
-}
-
-.prompt-copy-btn.copied {
-  background: var(--gh-green);
-}
-
-.prompt-content {
-  padding: 24px;
-  max-height: 500px;
-  overflow-y: auto;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--gh-black);
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.prompt-content::-webkit-scrollbar {
-  width: 6px;
-}
-
-.prompt-content::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.prompt-content::-webkit-scrollbar-thumb {
-  background: var(--gh-border);
-  border-radius: 3px;
-}
-
-.prompt-tip {
-  max-width: 800px;
-  margin: 24px auto 0;
-  padding: 16px 24px;
-  background: var(--gh-blue-bg);
-  border: 1px solid rgba(9, 105, 218, 0.15);
-  border-radius: var(--radius-md);
-  font-size: 14px;
-  color: var(--gh-blue);
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.prompt-tip-icon {
-  flex-shrink: 0;
-  font-size: 18px;
-}
-
-/* =============================================
-   10. PLATFORM RECOMMEND
-   ============================================= */
-.platform-section {
-  background: var(--white);
-}
-
-.platform-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.platform-card {
-  background: var(--bg-secondary);
-  border-radius: var(--radius-lg);
-  padding: 32px 24px;
-  text-align: center;
-  border: 1px solid var(--gh-border-muted);
-  transition: var(--transition);
-}
-
-.platform-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--gh-border);
-}
-
-.platform-card-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
-}
-
-.platform-card-name {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--gh-black);
-}
-
-.platform-card-desc {
-  font-size: 14px;
-  color: var(--gh-gray);
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.platform-card-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 24px;
-  background: var(--white);
-  color: var(--gh-blue);
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--gh-blue);
-  cursor: pointer;
-  transition: var(--transition);
-  text-decoration: none;
-}
-
-.platform-card-btn:hover {
-  background: var(--gh-blue);
-  color: white;
-}
-
-/* =============================================
-   11. FAQ
-   ============================================= */
-.faq-section {
-  background: var(--bg-secondary);
-}
-
-.faq-list {
-  max-width: 700px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
+/* ===== FAQ ===== */
+.faq-section { padding: 80px 24px; background: #f6f8fa; }
+.faq-section h2 { text-align: center; font-size: 32px; margin-bottom: 48px; }
+.faq-list { max-width: 700px; margin: 0 auto; }
 .faq-item {
-  background: var(--white);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--gh-border-muted);
-  overflow: hidden;
-  transition: var(--transition);
+  background: white; border-radius: 12px; margin-bottom: 12px;
+  border: 1px solid #eaecef; overflow: hidden;
 }
-
-.faq-item:hover {
-  border-color: var(--gh-border);
-}
-
 .faq-question {
-  display: flex;
+  width: 100%; padding: 20px 24px; background: none; border: none;
+  text-align: left; font-size: 16px; font-weight: 600;
+  cursor: pointer; display: flex; justify-content: space-between;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px 24px;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--gh-black);
-  cursor: pointer;
-  background: none;
-  border: none;
-  width: 100%;
-  text-align: left;
-  font-family: var(--font-sans);
-  transition: var(--transition);
 }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s; }
+.faq-answer-inner { padding: 0 24px 20px; color: #656d76; font-size: 14px; }
+.faq-item.open .faq-answer { max-height: 200px; }
 
-.faq-question:hover {
-  color: var(--gh-blue);
-}
-
-.faq-arrow {
-  font-size: 18px;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-  margin-left: 12px;
-}
-
-.faq-item.open .faq-arrow {
-  transform: rotate(180deg);
-}
-
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-}
-
-.faq-answer-inner {
-  padding: 0 24px 20px;
-  font-size: 15px;
-  color: var(--gh-gray);
-  line-height: 1.7;
-}
-
-/* =============================================
-   12. CONTACT
-   ============================================= */
-.contact-section {
-  background: var(--white);
-}
-
-.contact-card {
-  max-width: 500px;
-  margin: 0 auto;
-  background: var(--bg-secondary);
-  border-radius: var(--radius-xl);
-  padding: 40px;
-  text-align: center;
-  border: 1px solid var(--gh-border-muted);
-}
-
-.contact-wechat {
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--gh-black);
-  margin-bottom: 12px;
-  font-family: var(--font-mono);
-}
-
-.contact-copy-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 24px;
-  background: var(--gh-blue);
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  border: none;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: var(--transition);
-  margin-bottom: 24px;
-  font-family: var(--font-sans);
-}
-
-.contact-copy-btn:hover {
-  background: var(--gh-blue-hover);
-}
-
-.contact-copy-btn.copied {
-  background: var(--gh-green);
-}
-
-.contact-guide {
-  font-size: 14px;
-  color: var(--gh-gray);
-  line-height: 1.8;
-}
-
-.contact-guide strong {
-  color: var(--gh-black);
-}
-
-.contact-mp {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--gh-border-muted);
-  font-size: 14px;
-  color: var(--gh-gray);
-}
-
-.contact-mp strong {
-  color: var(--gh-black);
-}
-
-/* =============================================
-   13. ANTI-LOSS GUIDE
-   ============================================= */
-.antiloss-section {
-  background: linear-gradient(135deg, var(--gh-blue-bg), #e6f0ff);
-}
-
-.antiloss-card {
-  max-width: 500px;
-  margin: 0 auto;
-  background: var(--white);
-  border-radius: var(--radius-xl);
-  padding: 32px;
-  text-align: center;
-  border: 1px solid rgba(9, 105, 218, 0.15);
-  box-shadow: var(--shadow-md);
-}
-
-.antiloss-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
-}
-
-.antiloss-title {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--gh-black);
-}
-
-.antiloss-desc {
-  font-size: 15px;
-  color: var(--gh-gray);
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.antiloss-copy-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 24px;
-  background: var(--gh-blue);
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  border: none;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: var(--transition);
-  font-family: var(--font-sans);
-}
-
-.antiloss-copy-btn:hover {
-  background: var(--gh-blue-hover);
-}
-
-.antiloss-copy-btn.copied {
-  background: var(--gh-green);
-}
-
-/* =============================================
-   14. TEAM
-   ============================================= */
-.team-section {
-  background: var(--bg-secondary);
-}
-
-.team-header {
-  text-align: left;
-  margin-bottom: 32px;
-}
-
-.team-label {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--gh-orange);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-.team-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--gh-black);
-  margin-bottom: 8px;
-}
-
-.team-subtitle {
-  font-size: 16px;
-  color: var(--gh-gray);
-}
-
+/* ===== TEAM ===== */
+.team-section { padding: 80px 24px; }
+.team-header { text-align: center; margin-bottom: 48px; }
+.team-label { font-size: 12px; font-weight: 700; color: #bc4c00; letter-spacing: 2px; margin-bottom: 8px; }
+.team-title { font-size: 32px; margin-bottom: 8px; }
+.team-subtitle { color: #656d76; }
 .team-cards {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
+  display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 32px;
 }
-
 .team-card {
-  background: var(--white);
-  border-radius: var(--radius-xl);
-  padding: 24px;
-  border: 1px solid var(--gh-border-muted);
-  width: 380px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  transition: var(--transition);
+  background: white; border-radius: 16px; padding: 24px;
+  border: 1px solid #eaecef; width: 380px; display: flex;
+  align-items: center; gap: 20px;
 }
-
-.team-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-.team-avatar-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.team-info {
-  flex: 1;
-}
-
-.team-name {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 4px;
-  color: var(--gh-black);
-}
-
-.team-role {
-  font-size: 13px;
-  color: var(--gh-blue);
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.team-desc {
-  font-size: 14px;
-  color: var(--gh-gray);
-}
-
+.team-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+.team-info h3 { font-size: 20px; margin-bottom: 4px; }
+.team-role { font-size: 13px; color: #0969da; font-weight: 600; margin-bottom: 4px; }
+.team-desc { font-size: 14px; color: #656d76; }
 .team-footer {
-  text-align: center;
-  font-size: 14px;
-  color: var(--gh-gray);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
+  text-align: center; font-size: 14px; color: #656d76;
+  display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
 }
+.team-footer a { color: #bc4c00; font-weight: 600; text-decoration: none; }
 
-.team-footer svg {
-  vertical-align: middle;
-}
+/* ===== FOOTER ===== */
+.footer { padding: 60px 24px; background: #0d1117; color: white; text-align: center; }
+.footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 24px; }
+.footer-brand svg { width: 32px; height: 32px; fill: white; }
+.footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 24px; flex-wrap: wrap; }
+.footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; }
+.footer-links a:hover { color: white; }
+.footer-info { color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.8; }
+.footer-info a { color: #0969da; }
 
-.team-footer a {
-  color: var(--gh-orange);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.team-footer a:hover {
-  text-decoration: underline;
-}
-
-/* =============================================
-   15. FOOTER
-   ============================================= */
-.footer {
-  background: var(--bg-dark);
-  color: var(--gh-light-gray);
-  padding: 60px 0 32px;
-}
-
-.footer-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.footer-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
-}
-
-.footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 18px;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 12px;
-}
-
-.footer-brand svg {
-  width: 28px;
-  height: 28px;
-}
-
-.footer-brand svg path {
-  fill: white;
-}
-
-.footer-desc {
-  font-size: 14px;
-  color: var(--gh-light-gray);
-  max-width: 300px;
-  line-height: 1.6;
-}
-
-.footer-links-group {
-  display: flex;
-  gap: 48px;
-  flex-wrap: wrap;
-}
-
-.footer-col-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 12px;
-}
-
-.footer-links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.footer-links a {
-  font-size: 14px;
-  color: var(--gh-light-gray);
-  transition: var(--transition);
-}
-
-.footer-links a:hover {
-  color: white;
-}
-
-.footer-tabbit-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 24px;
-  background: linear-gradient(135deg, #8250df, #6e40c9);
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: var(--radius-full);
-  text-decoration: none;
-  transition: var(--transition);
-  margin-top: 8px;
-}
-
-.footer-tabbit-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(130, 80, 223, 0.4);
-  color: white;
-}
-
-.footer-bottom {
-  padding-top: 24px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.footer-copyright {
-  font-size: 13px;
-  color: var(--gh-light-gray);
-}
-
-.footer-dev {
-  font-size: 13px;
-  color: var(--gh-light-gray);
-}
-
-.footer-dev a {
-  color: var(--gh-light-gray);
-}
-
-.footer-dev a:hover {
-  color: white;
-}
-
-/* =============================================
-   16. FAB CONTAINER
-   ============================================= */
-#fab-container {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 8500;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-}
-
-.fab-main {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--gh-blue);
-  color: white;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 16px rgba(9, 105, 218, 0.4);
-  transition: var(--transition);
-  font-size: 24px;
-}
-
-.fab-main:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 24px rgba(9, 105, 218, 0.5);
-}
-
-.fab-main.open {
-  transform: rotate(45deg);
-}
-
-.fab-menu {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: var(--transition);
-}
-
-.fab-menu.open {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.fab-menu-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  white-space: nowrap;
-}
-
-.fab-menu-label {
-  padding: 8px 16px;
-  background: var(--bg-dark);
-  color: white;
-  font-size: 13px;
-  font-weight: 500;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
-}
-
-.fab-menu-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--white);
-  color: var(--gh-black);
-  border: 1px solid var(--gh-border);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
-}
-
-.fab-menu-btn:hover {
-  background: var(--gh-blue);
-  color: white;
-  border-color: var(--gh-blue);
-}
-
-/* =============================================
-   RESPONSIVE
-   ============================================= */
-@media (max-width: 1023px) {
-  .hero-title {
-    font-size: 40px;
-  }
-  .pain-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .platform-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .platform-cards .platform-card:last-child {
-    grid-column: span 2;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-}
-
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .section {
-    padding: 60px 0;
-  }
-  .section-title {
-    font-size: 26px;
-  }
-  .section-subtitle {
-    font-size: 16px;
-  }
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 64px;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(20px);
-    flex-direction: column;
-    padding: 16px;
-    border-bottom: 1px solid var(--gh-border);
-    box-shadow: var(--shadow-lg);
-  }
-  .nav-links.open {
-    display: flex;
-  }
-  .nav-toggle {
-    display: block;
-  }
-  .hero {
-    padding: 60px 0 48px;
-  }
-  .hero-title {
-    font-size: 32px;
-  }
-  .hero-subtitle {
-    font-size: 18px;
-  }
-  .hero-logo {
-    width: 72px;
-    height: 72px;
-  }
-  .pain-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .hero-stats {
-    gap: 32px;
-  }
-  .stat-number {
-    font-size: 28px;
-  }
-  .pain-cards {
-    grid-template-columns: 1fr 1fr;
-  }
-  .step-item {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .platform-cards {
-    grid-template-columns: 1fr;
-  }
-  .platform-cards .platform-card:last-child {
-    grid-column: span 1;
-    max-width: none;
-  }
-  .footer-top {
-    flex-direction: column;
-  }
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-@media (max-width: 640px) {
-  .container {
-    padding: 0 16px;
-  }
-  .hero-title {
-    font-size: 28px;
-  }
-  .hero-subtitle {
-    font-size: 16px;
-  }
-  .hero-cta {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .btn-primary, .btn-secondary {
-    justify-content: center;
-  }
-  .pain-cards {
-    grid-template-columns: 1fr;
-  }
-  .hero-stats {
-    flex-direction: column;
-    gap: 20px;
-  }
-  .team-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-  .team-card {
-    width: 100%;
-    max-width: 300px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: 24px;
-  }
-  .hero-badge {
-    font-size: 12px;
-    padding: 6px 14px;
-  }
-  .section-title {
-    font-size: 22px;
-  }
-  .contact-card {
-    padding: 24px;
-  }
-  .contact-wechat {
-    font-size: 26px;
-  }
-}
-
-@media (max-width: 374px) {
-  .hero-title {
-    font-size: 22px;
-  }
-  .hero-subtitle {
-    font-size: 15px;
-  }
-  .pain-item .text {
-    font-size: 13px;
-  }
-  .step-badge {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-  }
+  .nav-links { display: none; }
+  .hero { padding: 100px 16px 60px; }
+  .hero-buttons { flex-direction: column; }
+  .btn { width: 100%; justify-content: center; }
+  .pain-grid { grid-template-columns: 1fr; }
+  .step-item { flex-direction: column; text-align: center; }
+  .step-badge { margin: 0 auto; }
+  .team-card { width: 100%; flex-direction: column; text-align: center; }
+  .team-footer { flex-direction: column; }
 }
 </style>
 </head>
 <body>
 
-<!-- =============================================
-     1. WECHAT TIP
-     ============================================= -->
-<div id="wechat-tip">
-  <span>请在浏览器中打开此页面，微信内无法正常访问 GitHub Pages</span>
-  <button class="wechat-tip-close" onclick="document.getElementById('wechat-tip').style.display='none'">&times;</button>
-</div>
-
-<!-- =============================================
-     3. FLOAT POPUP
-     ============================================= -->
-<div id="float-popup">
-  <span>&#x1F381;</span>
-  <span>免费领取Tabbit AI浏览器Pro账号</span>
-  <button class="popup-close" onclick="event.stopPropagation();closeFloatPopup();">&times;</button>
-</div>
-
-<!-- =============================================
-     4. NAVIGATION
-     ============================================= -->
+<!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="#" class="nav-brand">
-      <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
+    <div class="nav-logo">
+      <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"><path fill="#1f2328" fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
       小白GitHub
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#steps">使用步骤</a></li>
-      <li><a href="#video">视频教程</a></li>
-      <li><a href="#prompt">提示词</a></li>
-      <li><a href="#faq">常见问题</a></li>
-      <li><a href="https://web.tabbit-ai.com/activity/study-invite/F5EB5A55" target="_blank" rel="noopener noreferrer" class="nav-cta">领取Tabbit</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="菜单">&#9776;</button>
+    </div>
+    <div class="nav-links">
+      <a href="#steps">使用步骤</a>
+      <a href="#video">视频教程</a>
+      <a href="#faq">常见问题</a>
+      <a href="https://web.tabbit-ai.com/activity/study-invite/F5EB5A55" class="nav-cta" target="_blank">领取Tabbit</a>
+    </div>
   </div>
 </nav>
 
-<!-- =============================================
-     5. HERO
-     ============================================= -->
+<!-- HERO -->
 <section class="hero">
+  <div class="hero-badge">专为小白设计 · 无需任何技术基础</div>
+  <div class="hero-logo">
+    <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"><path fill="#1f2328" fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
+  </div>
+  <h1>
+    想用GitHub上的开源项目<br>
+    但<span class="highlight">看不懂英文</span>？<br>
+    部署总报错？
+  </h1>
+  <p class="hero-subtitle">
+    现在，只需要把GitHub链接发给AI，就能得到一份中文「一键部署手册」，
+    手把手教你完成整个部署流程，再也不踩坑。
+  </p>
+  <div class="hero-buttons">
+    <a href="#steps" class="btn btn-primary">开始使用（只需3步）</a>
+    <a href="#video" class="btn btn-secondary">观看视频教程</a>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="pain-section">
   <div class="container">
-    <div class="hero-badge fade-in">专为小白设计 &middot; 无需任何技术基础</div>
-
-    <div class="hero-logo fade-in">
-      <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
-    </div>
-
-    <h1 class="hero-title fade-in">
-      想用GitHub上的开源项目<br>
-      <span class="highlight">但看不懂英文？部署总报错？</span>
-    </h1>
-
-    <p class="hero-subtitle fade-in">给个GitHub链接，AI自动生成一键部署手册</p>
-
-    <!-- Pain Point Grid -->
-    <div class="pain-grid fade-in">
-      <div class="pain-col">
-        <div class="pain-col-header pain">常见痛点</div>
-        <div class="pain-item pain-item-card">
-          <span class="icon">&#x1F4C4;</span>
-          <span class="text">满屏英文看不懂</span>
-        </div>
-        <div class="pain-item pain-item-card">
-          <span class="icon">&#x1F527;</span>
-          <span class="text">命令敲了全是报错</span>
-        </div>
-        <div class="pain-item pain-item-card">
-          <span class="icon">&#x1F310;</span>
-          <span class="text">网络超时无法下载</span>
-        </div>
-        <div class="pain-item pain-item-card">
-          <span class="icon">&#x1F4BB;</span>
-          <span class="text">环境冲突装不上</span>
-        </div>
+    <h2>这些困境，你是不是也遇到过？</h2>
+    <p class="subtitle">别担心，你并不孤单。每个小白都经历过这些。</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">📖</div>
+        <h3>满屏英文看不懂</h3>
+        <p>打开GitHub项目，README全是英文，翻译软件翻完还是看不懂技术术语。</p>
       </div>
-      <div class="pain-col">
-        <div class="pain-col-header solution">解决方案</div>
-        <div class="pain-item solution-item-card">
-          <span class="icon">&#x2705;</span>
-          <span class="text">全中文部署手册</span>
-        </div>
-        <div class="pain-item solution-item-card">
-          <span class="icon">&#x2705;</span>
-          <span class="text">一键复制粘贴命令</span>
-        </div>
-        <div class="pain-item solution-item-card">
-          <span class="icon">&#x2705;</span>
-          <span class="text">自动使用国内镜像</span>
-        </div>
-        <div class="pain-item solution-item-card">
-          <span class="icon">&#x2705;</span>
-          <span class="text">虚拟环境隔离</span>
-        </div>
+      <div class="pain-card">
+        <div class="pain-icon">😵</div>
+        <h3>跟着教程做还是报错</h3>
+        <p>照着README敲命令，每一步都报错，Google搜索结果也看不懂。</p>
       </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="hero-cta fade-in">
-      <a href="#steps" class="btn-primary">开始使用（只需3步）</a>
-      <a href="#video" class="btn-secondary">&#x25B6; 观看视频教程</a>
-    </div>
-
-    <!-- Stats -->
-    <div class="hero-stats fade-in">
-      <div class="stat-item">
-        <div class="stat-number">3步</div>
-        <div class="stat-label">完成部署</div>
+      <div class="pain-card">
+        <div class="pain-icon">📡</div>
+        <h3>网络问题让人崩溃</h3>
+        <p>pip install超时、npm下载失败、git clone断连，网络问题无处不在。</p>
       </div>
-      <div class="stat-item">
-        <div class="stat-number">0行</div>
-        <div class="stat-label">代码要求</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">中文手册</div>
+      <div class="pain-card">
+        <div class="pain-icon">🔥</div>
+        <h3>环境冲突装不上</h3>
+        <p>Python版本不对、依赖冲突、系统不兼容，折腾一天还是装不上。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- =============================================
-     6. PAIN POINT EMPATHY
-     ============================================= -->
-<section class="section pain-section">
+<!-- STEPS -->
+<section class="steps-section" id="steps">
   <div class="container">
-    <h2 class="section-title fade-in">这些困境，你是不是也遇到过？</h2>
-    <p class="section-subtitle fade-in">别担心，你并不孤单。每个小白都经历过这些。</p>
-    <div class="pain-cards">
-      <div class="pain-card fade-in">
-        <div class="pain-card-icon">&#x1F4D6;</div>
-        <div class="pain-card-title">满屏英文看不懂</div>
-        <div class="pain-card-desc">打开GitHub项目，README全是英文，翻译软件翻完还是看不懂技术术语。</div>
-      </div>
-      <div class="pain-card fade-in">
-        <div class="pain-card-icon">&#x1F635;</div>
-        <div class="pain-card-title">跟着教程做还是报错</div>
-        <div class="pain-card-desc">照着README敲命令，每一步都报错，Google搜索结果也看不懂。</div>
-      </div>
-      <div class="pain-card fade-in">
-        <div class="pain-card-icon">&#x1F4E1;</div>
-        <div class="pain-card-title">网络问题让人崩溃</div>
-        <div class="pain-card-desc">pip install超时、npm下载失败、git clone断连，网络问题无处不在。</div>
-      </div>
-      <div class="pain-card fade-in">
-        <div class="pain-card-icon">&#x1F525;</div>
-        <div class="pain-card-title">环境冲突装不上</div>
-        <div class="pain-card-desc">Python版本不对、依赖冲突、系统不兼容，折腾一天还是装不上。</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =============================================
-     7. STEPS - 三步一福利
-     ============================================= -->
-<section class="section steps-section" id="steps">
-  <div class="container">
-    <h2 class="section-title fade-in">三步一福利，轻松搞定部署</h2>
-    <p class="section-subtitle fade-in">跟着做，零基础也能搞定</p>
-    
-    <!-- 福利 Step 0 -->
-    <div class="step-item step-bonus fade-in">
-      <div class="step-badge bonus">🎁</div>
-      <div class="step-content">
-        <h3 class="step-title">Step 0：送福利 — 领取Tabbit Pro账号</h3>
-        <p class="step-desc">关注微信公众号「鸡血青年冀文辉」，点击底部菜单栏「0元Token」，注册领取Tabbit浏览器Pro账号。</p>
-      </div>
-    </div>
+    <h2>三步一福利，轻松搞定部署</h2>
+    <p class="subtitle">跟着做，零基础也能搞定</p>
     
     <div class="steps-list">
-      <div class="step-item fade-in">
+      <div class="step-item">
+        <div class="step-badge bonus">🎁</div>
+        <div class="step-content">
+          <h3>点击领取Tabbit Pro账号（限量18个）</h3>
+          <p>关注微信公众号「鸡血青年冀文辉」，点击底部菜单栏「0元Token」，注册领取Tabbit浏览器Pro账号。</p>
+          <a href="https://web.tabbit-ai.com/activity/study-invite/F5EB5A55" class="step-link" target="_blank">立即领取 →</a>
+        </div>
+      </div>
+      
+      <div class="step-item">
+        <div class="step-badge bonus">📡</div>
+        <div class="step-content">
+          <h3>防失联：一键复制微信公众号</h3>
+          <p>关注「鸡血青年冀文辉」公众号，获取更多开源项目部署教程和AI工具使用技巧。</p>
+          <button class="step-link" onclick="copyText('鸡血青年冀文辉')">复制公众号名称</button>
+        </div>
+      </div>
+      
+      <div class="step-item">
         <div class="step-badge">1</div>
         <div class="step-content">
-          <h3 class="step-title">打开Tabbit浏览器，添加「小白GitHub」妙招</h3>
-          <p class="step-desc">点击右上角「小灯泡」→「妙招广场」→ 搜索「小白GitHub」→ 点击一键添加。</p>
+          <h3>打开Tabbit浏览器，添加「小白GitHub」妙招</h3>
+          <p>点击右上角「小灯泡」→「妙招广场」→ 搜索「小白GitHub」→ 点击一键添加。</p>
         </div>
       </div>
-      <div class="step-item fade-in">
+      
+      <div class="step-item">
         <div class="step-badge">2</div>
         <div class="step-content">
-          <h3 class="step-title">使用妙招生成部署手册</h3>
-          <p class="step-desc">点击右上角「Chat」，将GitHub项目链接粘贴到输入框，输入「/」选择「小白GitHub」后回车发送。出现智能代理请求时选择「执行」，然后你就可以忙其他事情了，任务会在后台静默运行。</p>
+          <h3>使用妙招生成部署手册</h3>
+          <p>点击右上角「Chat」，将GitHub项目链接粘贴到输入框，输入「/」选择「小白GitHub」后回车发送。出现智能代理请求时选择「执行」，然后你就可以忙其他事情了，任务会在后台静默运行。</p>
         </div>
       </div>
-      <div class="step-item fade-in">
+      
+      <div class="step-item">
         <div class="step-badge">3</div>
         <div class="step-content">
-          <h3 class="step-title">保存部署文件，拖入AI工具安装</h3>
-          <p class="step-desc">任务完成后，点击@按钮选择保存位置，部署文件.md会自动下载。然后将文件拖入OpenClaw、Hermes、Claude Code、Codex、Qclaw、WorkBuddy、Marvis、SOLO等工具中即可完成安装。</p>
+          <h3>保存部署文件，拖入AI工具安装</h3>
+          <p>任务完成后，点击@按钮选择保存位置，部署文件.md会自动下载。然后将文件拖入OpenClaw、Hermes、Claude Code、Codex、Qclaw、WorkBuddy、Marvis、SOLO等工具中即可完成安装。</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- =============================================
-     8. VIDEO
-     ============================================= -->
-<section class="section video-section" id="video">
+<!-- VIDEO -->
+<section class="video-section" id="video">
   <div class="container">
-    <h2 class="section-title fade-in">不想看文字？直接看视频</h2>
-    <p class="section-subtitle fade-in">3分钟视频，手把手教你完成部署</p>
-    <div class="video-wrapper fade-in">
-      <video id="tutorialVideo" controls preload="metadata" poster="">
+    <h2>不想看文字？直接看视频</h2>
+    <p class="subtitle">3分钟视频，手把手教你完成部署</p>
+    <div class="video-wrapper">
+      <video controls preload="metadata" poster="">
         <source src="https://raw.githubusercontent.com/choosemoon/xiaobai-github/main/video/demo.mp4" type="video/mp4">
         你的浏览器不支持视频播放
       </video>
     </div>
-    <p class="video-upload-hint fade-in">如果视频加载较慢，请耐心等待，或刷新页面重试</p>
   </div>
 </section>
 
-<!-- =============================================
-     10. FAQ
-     ============================================= -->
-<section class="section faq-section" id="faq">
+<!-- FAQ -->
+<section class="faq-section" id="faq">
   <div class="container">
-    <h2 class="section-title fade-in">常见问题</h2>
-    <p class="section-subtitle fade-in">还有疑问？看看这里有没有答案</p>
+    <h2>常见问题</h2>
     <div class="faq-list">
-      <div class="faq-item fade-in">
+      <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
           <span>不需要懂技术就能用吗？</span>
-          <span class="faq-arrow">&#x25BC;</span>
+          <span>▼</span>
         </button>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">完全不需要！整个流程只需要你会复制粘贴链接即可。AI会自动帮你调研项目、生成中文部署手册，手册里的每一步都是可以直接复制粘贴的命令。</div>
-        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">完全不需要！整个流程只需要你会复制粘贴链接即可。AI会自动帮你调研项目、生成中文部署手册。</div></div>
       </div>
-      <div class="faq-item fade-in">
+      <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
           <span>为什么要用Tabbit浏览器？</span>
-          <span class="faq-arrow">&#x25BC;</span>
+          <span>▼</span>
         </button>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">Tabbit浏览器内置了AI智能代理功能，可以直接打开GitHub网页进行调研。普通浏览器无法让AI直接访问网页内容，而Tabbit可以。此外，Tabbit还可以帮你自动执行部署命令。</div>
-        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">Tabbit浏览器内置了AI智能代理功能，可以直接打开GitHub网页进行调研。普通浏览器无法让AI直接访问网页内容。</div></div>
       </div>
-      <div class="faq-item fade-in">
+      <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
           <span>网络不好也能用吗？</span>
-          <span class="faq-arrow">&#x25BC;</span>
+          <span>▼</span>
         </button>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">可以！生成的部署手册会自动使用国内镜像源（如清华源、阿里源），不需要翻墙也能完成大部分项目的安装部署。Tabbit浏览器的智能代理也可以帮助你访问GitHub。</div>
-        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">可以！生成的手册会自动使用国内镜像源，自动处理大文件断点续传，自动选择最优方案。</div></div>
       </div>
-      <div class="faq-item fade-in">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>生成的手册是什么样的？</span>
-          <span class="faq-arrow">&#x25BC;</span>
-        </button>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">手册是一份完整的Markdown文件，包含：部署前环境检查、多种一键安装方案（适配不同操作系统）、部署后配置说明、常见问题解答等。所有步骤都是中文，命令可以直接复制执行。</div>
-        </div>
-      </div>
-      <div class="faq-item fade-in">
+      <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
           <span>这个服务收费吗？</span>
-          <span class="faq-arrow">&#x25BC;</span>
+          <span>▼</span>
         </button>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">提示词完全免费使用！Tabbit浏览器提供免费Pro账号领取活动，注册即可获得免费Token。GitHub上的开源项目本身也是免费的。</div>
-        </div>
-      </div>
-      <div class="faq-item fade-in">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span>部署失败了怎么办？</span>
-          <span class="faq-arrow">&#x25BC;</span>
-        </button>
-        <div class="faq-answer">
-          <div class="faq-answer-inner">可以添加微信 16623164635 联系开发者，提供你的报错信息和项目链接，我们会帮你排查问题。也可以关注微信公众号「鸡血青年冀文辉」获取更多帮助。</div>
-        </div>
+        <div class="faq-answer"><div class="faq-answer-inner">提示词本身完全免费。你只需要一个能使用AI的账号和Tabbit浏览器（可免费领取Pro账号）。</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- =============================================
-     12. CONTACT
-     ============================================= -->
-<section class="section contact-section" id="contact">
-  <div class="container">
-    <h2 class="section-title fade-in">联系我</h2>
-    <p class="section-subtitle fade-in">遇到问题？随时联系</p>
-    <div class="contact-card fade-in">
-      <div class="contact-wechat">16623164635</div>
-      <button class="contact-copy-btn" id="contactCopyBtn" onclick="copyText('16623164635', 'contactCopyBtn', '复制微信号')">&#x1F4CB; 复制微信号</button>
-      <div class="contact-guide">
-        <strong>添加步骤：</strong><br>
-        打开微信 &rarr; 添加朋友 &rarr; 输入手机号 <strong>16623164635</strong> &rarr; 发送
-      </div>
-      <div class="contact-mp">
-        <strong>微信公众号：</strong>鸡血青年冀文辉
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =============================================
-     13. ANTI-LOSS GUIDE
-     ============================================= -->
-<section class="section antiloss-section">
-  <div class="container">
-    <div class="antiloss-card fade-in">
-      <div class="antiloss-icon">&#x1F4E1;</div>
-      <h3 class="antiloss-title">防失联提醒</h3>
-      <p class="antiloss-desc">微信搜索关注「鸡血青年冀文辉」，第一时间获取最新教程和福利。</p>
-      <button class="antiloss-copy-btn" id="antilossCopyBtn" onclick="copyText('鸡血青年冀文辉', 'antilossCopyBtn', '复制公众号名称')">&#x1F4CB; 复制公众号名称</button>
-    </div>
-  </div>
-</section>
-
-<!-- =============================================
-     14. TEAM
-     ============================================= -->
-<section class="section team-section">
+<!-- TEAM -->
+<section class="team-section">
   <div class="container">
     <div class="team-header">
       <div class="team-label">TEAM</div>
@@ -1989,18 +369,18 @@ img {
       <p class="team-subtitle">choosemoon · One Person Company 一人公司</p>
     </div>
     <div class="team-cards">
-      <div class="team-card fade-in">
-        <img class="team-avatar-img" src="https://raw.githubusercontent.com/choosemoon/xiaobai-github/main/images/avatar-wayne.png" alt="Wayne Brock">
+      <div class="team-card">
+        <img class="team-avatar" src="https://raw.githubusercontent.com/choosemoon/xiaobai-github/main/images/avatar-wayne.png" alt="Wayne Brock">
         <div class="team-info">
-          <div class="team-name">Wayne Brock</div>
+          <h3>Wayne Brock</h3>
           <div class="team-role">碳基生命 · 产品 & 运营</div>
           <div class="team-desc">负责项目规划、节点维护和用户支持</div>
         </div>
       </div>
-      <div class="team-card fade-in">
-        <img class="team-avatar-img" src="https://raw.githubusercontent.com/choosemoon/xiaobai-github/main/images/avatar-snoopy.png" alt="Snoopy">
+      <div class="team-card">
+        <img class="team-avatar" src="https://raw.githubusercontent.com/choosemoon/xiaobai-github/main/images/avatar-snoopy.png" alt="Snoopy">
         <div class="team-info">
-          <div class="team-name">Snoopy</div>
+          <h3>Snoopy</h3>
           <div class="team-role">硅基生命 · 开发 & 自动化运维</div>
           <div class="team-desc">负责网站开发、部署和技术架构</div>
         </div>
@@ -2009,247 +389,67 @@ img {
     <div class="team-footer">
       <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path fill="#656d76" fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
       <span>GitHub:</span>
-      <a href="https://github.com/choosemoon" target="_blank" rel="noopener noreferrer">choosemoon</a>
+      <a href="https://github.com/choosemoon" target="_blank">choosemoon</a>
       <span>· 一人公司 · 开发过程全程录制解说，欢迎了解</span>
     </div>
   </div>
 </section>
 
-<!-- =============================================
-     15. FOOTER
-     ============================================= -->
+<!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div>
-        <div class="footer-brand">
-          <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
-          小白GitHub
-        </div>
-        <p class="footer-desc">给个GitHub链接，AI自动生成一键部署手册。专为小白设计，无需任何技术基础。</p>
-      </div>
-      <div class="footer-links-group">
-        <div>
-          <div class="footer-col-title">导航</div>
-          <ul class="footer-links">
-            <li><a href="#steps">使用步骤</a></li>
-            <li><a href="#video">视频教程</a></li>
-            <li><a href="#prompt">提示词</a></li>
-            <li><a href="#faq">常见问题</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer-col-title">联系</div>
-          <ul class="footer-links">
-            <li><a href="#contact">联系我</a></li>
-            <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-          </ul>
-        </div>
-      </div>
+  <div class="container">
+    <div class="footer-brand">
+      <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"><path fill="white" fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
+      <span>小白GitHub</span>
     </div>
-    <div style="text-align:center; margin-bottom: 24px;">
-      <a href="https://web.tabbit-ai.com/activity/study-invite/F5EB5A55" target="_blank" rel="noopener noreferrer" class="footer-tabbit-btn">&#x1F9E0; 领取Tabbit Pro</a>
+    <div class="footer-links">
+      <a href="#steps">使用步骤</a>
+      <a href="#video">视频教程</a>
+      <a href="#faq">常见问题</a>
+      <a href="https://github.com/choosemoon" target="_blank">GitHub</a>
     </div>
-    <div class="footer-bottom">
-      <span class="footer-copyright">&copy; 2025 小白GitHub. All rights reserved.</span>
-      <span class="footer-dev">开发者：<a href="#contact">冀文辉</a> | 微信公众号：鸡血青年冀文辉</span>
+    <div class="footer-info">
+      <p><strong>开发</strong>：冀文辉 | <strong>微信公众号</strong>：鸡血青年冀文辉 | <strong>微信</strong>：16623164635</p>
+      <p style="margin-top: 8px; opacity: 0.5;">© 2026 小白GitHub · 用最简单的方式，部署任何开源项目</p>
     </div>
   </div>
 </footer>
 
-<!-- =============================================
-     16. FAB CONTAINER
-     ============================================= -->
-<div id="fab-container">
-  <div class="fab-menu" id="fabMenu">
-    <div class="fab-menu-item">
-      <span class="fab-menu-label">使用步骤</span>
-      <a href="#steps" class="fab-menu-btn" title="使用步骤">&#x1F4CB;</a>
-    </div>
-    <div class="fab-menu-item">
-      <span class="fab-menu-label">添加妙招</span>
-      <button class="fab-menu-btn" onclick="window.open('https://web.tabbit-ai.com/share/skill/SQJ8VJGmJH', '_blank')" title="添加妙招">&#x1F4A1;</button>
-    </div>
-    <div class="fab-menu-item">
-      <span class="fab-menu-label">联系我</span>
-      <a href="#contact" class="fab-menu-btn" title="联系我">&#x1F4AC;</a>
-    </div>
-  </div>
-  <button class="fab-main" id="fabMain" onclick="toggleFab()" title="快捷菜单">&#x2795;</button>
-</div>
-
-<!-- =============================================
-     JAVASCRIPT
-     ============================================= -->
 <script>
-(function() {
-  'use strict';
-
-  // =============================================
-  // 1. WeChat UA Detection
-  // =============================================
-  var ua = navigator.userAgent.toLowerCase();
-  if (/micromessenger/i.test(ua)) {
-    document.getElementById('wechat-tip').style.display = 'block';
-  }
-
-  // =============================================
-  // 3. Float Popup - 3s delay + localStorage daily dismiss
-  // =============================================
-  var floatPopup = document.getElementById('float-popup');
-  var popupKey = 'float_popup_dismissed';
-
-  function checkFloatPopup() {
-    var dismissed = localStorage.getItem(popupKey);
-    if (dismissed !== today) {
-      setTimeout(function() {
-        if (localStorage.getItem(popupKey) !== today) {
-          floatPopup.classList.add('show');
-        }
-      }, 3000);
-    }
-  }
-  checkFloatPopup();
-
-  floatPopup.addEventListener('click', function(e) {
-    if (e.target.closest('.popup-close')) return;
-    window.open('https://web.tabbit-ai.com/activity/study-invite/F5EB5A55', '_blank');
+// FAQ Toggle
+function toggleFaq(btn) {
+  var item = btn.parentElement;
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(faq) {
+    faq.classList.remove('open');
   });
+  if (!isOpen) item.classList.add('open');
+}
 
-  window.closeFloatPopup = function() {
-    floatPopup.classList.remove('show');
-    localStorage.setItem(popupKey, today);
-  };
-
-  // =============================================
-  // 4. Mobile Nav Toggle
-  // =============================================
-  var navToggle = document.getElementById('navToggle');
-  var navLinks = document.getElementById('navLinks');
-
-  navToggle.addEventListener('click', function() {
-    navLinks.classList.toggle('open');
-  });
-
-  // Close nav on link click (mobile)
-  navLinks.querySelectorAll('a').forEach(function(link) {
-    link.addEventListener('click', function() {
-      navLinks.classList.remove('open');
-    });
-  });
-
-  // =============================================
-  // 5. Copy Text
-  // =============================================
-  window.copyText = function(text, btnId, defaultLabel) {
-    var btn = btnId ? document.getElementById(btnId) : event.target;
-    var label = defaultLabel || (btn ? btn.textContent : '复制');
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function() {
-        showCopied(btn, label);
-      }).catch(function() {
-        fallbackCopy(text, btn, label);
-      });
-    } else {
-      fallbackCopy(text, btn, label);
-    }
-  };
-
-  function showCopied(btn, defaultLabel) {
-    if (!btn) return;
-    var originalText = btn.innerHTML;
-    btn.innerHTML = '&#x2705; 已复制';
-    btn.classList.add('copied');
-    setTimeout(function() {
-      btn.innerHTML = originalText;
-      btn.classList.remove('copied');
-    }, 2000);
-  }
-
-  function fallbackCopy(text, btn, defaultLabel) {
-    var ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.left = '-9999px';
-    document.body.appendChild(ta);
-    ta.select();
-    try {
-      document.execCommand('copy');
-      showCopied(btn, defaultLabel);
-    } catch (e) {
-      if (btn) btn.innerHTML = '复制失败';
-    }
-    document.body.removeChild(ta);
-  }
-
-  // =============================================
-  // 7. FAQ Toggle
-  // =============================================
-  window.toggleFaq = function(btn) {
-    var item = btn.closest('.faq-item');
-    var answer = item.querySelector('.faq-answer');
-    var isOpen = item.classList.contains('open');
-
-    // Close all
-    document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
-      openItem.classList.remove('open');
-      openItem.querySelector('.faq-answer').style.maxHeight = '0';
-    });
-
-    // Open clicked if was closed
-    if (!isOpen) {
-      item.classList.add('open');
-      answer.style.maxHeight = answer.scrollHeight + 'px';
-    }
-  };
-
-  // =============================================
-  // 8. FAB Toggle
-  // =============================================
-  window.toggleFab = function() {
-    var fabMain = document.getElementById('fabMain');
-    var fabMenu = document.getElementById('fabMenu');
-    fabMain.classList.toggle('open');
-    fabMenu.classList.toggle('open');
-  };
-
-  // Close FAB menu when clicking outside
-  document.addEventListener('click', function(e) {
-    var fabContainer = document.getElementById('fab-container');
-    if (!fabContainer.contains(e.target)) {
-      document.getElementById('fabMain').classList.remove('open');
-      document.getElementById('fabMenu').classList.remove('open');
-    }
-  });
-
-  // =============================================
-  // 9. Scroll Fade-in Animation (IntersectionObserver)
-  // =============================================
-  if ('IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
-
-    document.querySelectorAll('.fade-in').forEach(function(el) {
-      observer.observe(el);
+// Copy Text
+function copyText(text) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() {
+      alert('已复制：' + text);
     });
   } else {
-    // Fallback: show all
-    document.querySelectorAll('.fade-in').forEach(function(el) {
-      el.classList.add('visible');
-    });
+    var ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    alert('已复制：' + text);
   }
+}
 
-})();
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
 </script>
+
 </body>
 </html>
