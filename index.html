@@ -1886,19 +1886,12 @@ img {
     <h2 class="section-title fade-in">不想看文字？直接看视频</h2>
     <p class="section-subtitle fade-in">3分钟视频，手把手教你完成部署</p>
     <div class="video-wrapper fade-in">
-      <!-- 替换视频：将下方 src 替换为你的视频完整URL，并移除 video-placeholder -->
       <video id="tutorialVideo" controls preload="metadata" poster="">
-        <!-- <source src="https://your-domain.com/video.mp4" type="video/mp4"> -->
+        <source src="https://raw.githubusercontent.com/choosemoon/xiaobai-github/main/video/demo.mp4" type="video/mp4">
         你的浏览器不支持视频播放
       </video>
-      <div class="video-placeholder" id="videoPlaceholder" onclick="document.getElementById('videoPlaceholder').style.display='none';">
-        <div class="play-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="5,3 19,12 5,21"/></svg>
-        </div>
-        <div class="play-text">点击播放视频教程</div>
-      </div>
     </div>
-    <p class="video-upload-hint fade-in">如需替换视频，请修改 video 标签的 source src 为完整视频URL（如 https://your-domain.com/video.mp4）</p>
+    <p class="video-upload-hint fade-in">如果视频加载较慢，请耐心等待，或刷新页面重试</p>
   </div>
 </section>
 
